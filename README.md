@@ -19,20 +19,20 @@ Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 
 
 ## How to install and uninstall? 
-**chemregnum** can be installed from the [Python Package Index (PyPI)](https://pypi.org/) repository by calling
+**casregnum** can be installed from the [Python Package Index (PyPI)](https://pypi.org/) repository by calling
 
-	pip install chemregnum
+	pip install casregnum
 
 In order to uninstall **ChemFormula** from your local environment use
 
-	pip uninstall chemregnum
+	pip uninstall casregnum
 
 
 ## How to use?
-**chemregnum** provides the `CAS` class for creating a CAS Registry Number&reg; instance:
+**casregnum** provides the `CAS` class for creating a CAS Registry Number&reg; instance:
 
 ```Python
-from chemregnum import CAS
+from casregnum import CAS
 
 substance = CAS(cas_rn)
 ```
