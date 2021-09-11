@@ -1,27 +1,48 @@
 import re
 
-### Class for CAS Registry Numbers
+"""
+Class for CAS Registry Numbers® (CAS RN®)
+allwos to manage, check and sort CAS Registry Numbers®
+see https://www.cas.org/support/documentation/chemical-substances/checkdig for a complete specification of the CAS Registry Numbers®
+and the calculation method to determine the check digit
+"""
+
+
 class CAS:
-    def __init__(self, cas_reg_num):
-        # case that input cas_reg_num is an integer
-        if isinstance(cas_reg_num, int):
-            self.cas_integer = cas_reg_num
+    def __init__(self, cas_rn):
+        # case that input cas_rn is an integer
+        if isinstance(cas_rn, int):
+            self.cas_integer = cas_rn
             # convert integer into (formatted) CAS string
-            regex_cas = re.compile("(\d{2,7})(\d{2})(\d{1})")
-            self.cas_string = regex_cas.sub("\g<1>-\g<2>-\g<3>", str(cas_reg_num))
-        # case that cas_reg_num is a string
-        elif isinstance(cas_reg_num, str):
-            self.cas_string = cas_reg_num
-        # case that cas_reg_num is neither an integer nor a string
+            self.cas_string = re.sub(
+                "^(\d{2,7})(\d{2})(\d{1})$", "\g<1>-\g<2>-\g<3>", str(cas_rn)
+            )
+        # case that cas_rn is a string
+        elif isinstance(cas_rn, str):
+            self.cas_string = cas_rn
+        # case that cas_rn is neither an integer nor a string
         else:
             raise TypeError(
-                f"Invalid CAS Registry Number format '{cas_reg_num}' (expected an integer (<class 'int'>) or a string (<class 'str'>), but found {type(cas_reg_num)})"
+                f"Invalid CAS Registry Number format '{cas_rn}' (expected an integer (<class 'int'>) or a string (<class 'str'>), but found {type(cas_rn)})"
             )
         # extract check digit = last digit of the CAS number
-        self.check_digit = int(str(cas_reg_num)[-1])
+        self.check_digit = int(str(cas_rn)[-1])
 
+    ### default string output for CAS Registry Numbers
     def __str__(self):
-        return self.cas_string
+        return str(self.cas_string)
+
+    ### defines a string format for CAS Registry Numbers
+    def __format__(self, format_spec):
+        return f"{self.cas_string:{format_spec}}"
+
+    ### checks if two CAS Registry Numbers are equal
+    def __eq__(self, other):
+        return True if self.cas_integer == other.cas_integer else False
+
+    ### checks if self.cas_integer < other.cas_integer
+    def __lt__(self, other):
+        return True if self.cas_integer < other.cas_integer else False
 
     ### Returns CAS Registry Number
     @property
@@ -32,19 +53,18 @@ class CAS:
     ###    if the passed input value is a string, parse the string according to _____00-00-0
     ###    if the passed input value is an integer, create the string arrocing to _____00-00-0
     @cas_string.setter
-    def cas_string(self, cas_reg_num):
+    def cas_string(self, cas_rn):
         # convert (formatted) CAS string into integer
-        regex_cas = re.match("(\d{2,7})\-(\d{2})-(\d{1})", cas_reg_num)
-        if regex_cas:
+        if regex_cas := re.match("^(\d{2,7})\-(\d{2})-(\d{1})$", cas_rn):
             self.cas_integer = self.__cas_integer = int(
                 regex_cas.group(1) + regex_cas.group(2) + regex_cas.group(3)
             )
-        # cas_reg_num is not following the notation rule for CAS numbers => ValueError
+        # cas_rn is not following the notation rule for CAS numbers => ValueError
         else:
             raise ValueError(
-                f"Invalid CAS number format for '{cas_reg_num}' (must follow the notation _____00-00-0)"
+                f"Invalid CAS number format for '{cas_rn}' (must follow the notation _____00-00-0)"
             )
-        self.__cas_string = cas_reg_num
+        self.__cas_string = cas_rn
 
     ### Returns CAS Registry Number as an integer (without the hyphens)
     @property
@@ -52,15 +72,15 @@ class CAS:
         return self.__cas_integer
 
     @cas_integer.setter
-    def cas_integer(self, cas_reg_num):
+    def cas_integer(self, cas_rn):
         # by definition, the lowest theoretical CAS number is 10-00-4,
         # the officially lowest CAS number on record is 35-66-5 (as of June 2019)
         # (Source: https://twitter.com/CASChemistry/status/1144222698740092929)
-        if cas_reg_num < 10004:
+        if cas_rn < 10004 or cas_rn > 9999999995:
             raise TypeError(
-                f"Invalid CAS number '{cas_reg_num}' (must be an integer >= 10004)"
+                f"Invalid CAS number '{cas_rn}' (must be an integer between 10004 and 9999999995)"
             )
-        self.__cas_integer = cas_reg_num
+        self.__cas_integer = cas_rn
 
     ### Returns check digit of the CAS Registry Number
     @property
