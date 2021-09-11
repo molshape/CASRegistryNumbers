@@ -23,7 +23,7 @@ Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 
 	pip install casregnum
 
-In order to uninstall **ChemFormula** from your local environment use
+In order to uninstall **casregnum** from your local environment use
 
 	pip uninstall casregnum
 
