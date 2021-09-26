@@ -77,7 +77,7 @@ class CAS:
         # the officially lowest CAS number on record is 35-66-5 (as of June 2019)
         # (Source: https://twitter.com/CASChemistry/status/1144222698740092929)
         if cas_rn < 10004 or cas_rn > 9999999995:
-            raise TypeError(
+            raise ValueError(
                 f"Invalid CAS number '{cas_rn}' (must be an integer between 10004 and 9999999995)"
             )
         self.__cas_integer = cas_rn
