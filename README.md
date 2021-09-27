@@ -1,6 +1,7 @@
 # casregnum
 
 ![PyPI](https://img.shields.io/pypi/v/casregnum)
+![pytest](https://github.com/molshape/casregnum/actions/workflows/python-app.yml/badge.svg)
 
 Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 
