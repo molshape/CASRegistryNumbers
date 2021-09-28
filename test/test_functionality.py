@@ -54,7 +54,7 @@ def test_cas_check_digit_print(caffeine):
     assert caffeine.check_digit
 
 
-def test_cas_check_digit(caffeine):
+def test_cas_string_output(caffeine):
     assert str(caffeine) == "58-08-2"
 
 
