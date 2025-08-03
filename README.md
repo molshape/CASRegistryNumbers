@@ -1,7 +1,11 @@
 # casregnum
 
-![PyPI](https://img.shields.io/pypi/v/casregnum)
-![pytest](https://github.com/molshape/CASRegistryNumbers/actions/workflows/python-app.yml/badge.svg)
+![PyPI Version](https://img.shields.io/pypi/v/casregnum)
+![CI](https://github.com/molshape/CASRegistryNumbers/actions/workflows/ci.yml/badge.svg)
+![Python Versions](https://img.shields.io/pypi/pyversions/casregnum)
+![License](https://img.shields.io/github/license/molshape/casregnum) \
+![GitHub stars](https://img.shields.io/github/stars/molshape/casregnum)
+
 
 Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 
