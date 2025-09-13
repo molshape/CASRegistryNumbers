@@ -78,21 +78,31 @@ def test_for_sorting(octanes, octanes_sorted):
 # Tests for error handling
 
 
-@pytest.mark.xfail(raises=TypeError)
+def test_cas_equal_invalid(caffeine):
+    with pytest.raises(TypeError):
+        assert caffeine == "theine"
+
+
+def test_cas_lesser_than_invalid(l_lacticacid):
+    with pytest.raises(TypeError):
+        assert l_lacticacid < "D-lactic acid"
+
+
 def test_cas_invalid_input():
-    CAS(6417.5)
+    with pytest.raises(TypeError):
+        CAS(6417.5)
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_cas_format_unreadable():
-    CAS("64 - 17 - 5")
+    with pytest.raises(ValueError):
+        CAS("64 - 17 - 5")
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_cas_range_error():
-    CAS(100)
+    with pytest.raises(ValueError):
+        CAS(100)
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_cas_check_digit_error():
-    CAS("64-17-6")
+    with pytest.raises(ValueError):
+        CAS("64-17-6")

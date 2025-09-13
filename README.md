@@ -2,6 +2,7 @@
 
 ![PyPI Version](https://img.shields.io/pypi/v/casregnum)
 ![CI](https://github.com/molshape/CASRegistryNumbers/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/molshape/CASRegistryNumbers/graph/badge.svg?token=5HZN6RX2XA)](https://codecov.io/github/molshape/CASRegistryNumbers) \
 ![Python Versions](https://img.shields.io/pypi/pyversions/casregnum)
 ![License](https://img.shields.io/github/license/molshape/casregnum) \
 ![GitHub stars](https://img.shields.io/github/stars/molshape/casregnum)
@@ -10,7 +11,7 @@
 Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 
 <details>
-<summary>Table of Content</summary>
+<summary>Table of Contents</summary>
 
 1. [Description](#description)
 2. [How to install and uninstall?](#how-to-install-and-uninstall)
@@ -23,17 +24,25 @@ Python class to manage, check and sort CAS Registry Numbers&reg; (CAS RN&reg;).
 **casregnum** is a Python class to manage, check, and sort CAS Registry Numbers&reg; (CAS RN&reg;) by the [Chemical Abstracts Service](https://www.cas.org/). Check their official [FAQ website](https://www.cas.org/support/documentation/chemical-substances/faqs) for more information on CAS numbers.
 
 
-## How to install and uninstall? 
+## How to install and uninstall
 **casregnum** can be installed from the [Python Package Index (PyPI)](https://pypi.org/) repository by calling
 
-	pip install casregnum
+    pip install casregnum
+
+or
+
+    uv add casregnum
 
 In order to uninstall **casregnum** from your local environment use
 
-	pip uninstall casregnum
+    pip uninstall casregnum
+
+or
+
+    uv remove casregnum
 
 
-## How to use?
+## How to use
 **casregnum** provides the `CAS` class for creating a CAS Registry Number&reg; instance:
 
 ```Python
@@ -81,18 +90,15 @@ for i, isomer in enumerate(sorted(octanes), start=1):
         print()
 ```
 
-will generate the following output:
+This will generate the following output:
 
-```
-str: 58-08-2
-int: 58082
-check digit: 2
-58-08-2 == 58-08-2: True
-58-08-2 > 58-08-2: False
-79-33-4 > 10326-41-7: False
-79-33-4 < 10326-41-7: True
- 111-65-9,  540-84-1,  560-21-4,  563-16-6,  564-02-3,  565-75-3,
- 583-48-2,  584-94-1,  589-43-5,  589-53-7,  589-81-1,  590-73-8,
- 592-13-2,  592-27-8,  594-82-1,  609-26-7,  619-99-8, 1067-08-9,
-```
-
+    str: 58-08-2
+    int: 58082
+    check digit: 2
+    58-08-2 == 58-08-2: True
+    58-08-2 > 58-08-2: False
+    79-33-4 > 10326-41-7: False
+    79-33-4 < 10326-41-7: True
+    111-65-9,  540-84-1,  560-21-4,  563-16-6,  564-02-3,  565-75-3,
+    583-48-2,  584-94-1,  589-43-5,  589-53-7,  589-81-1,  590-73-8,
+    592-13-2,  592-27-8,  594-82-1,  609-26-7,  619-99-8, 1067-08-9,
