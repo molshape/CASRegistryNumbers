@@ -1,5 +1,3 @@
-import re
-
 """
 Class for CAS Registry Numbers® (CAS RN®)
 allows to manage, check and sort CAS Registry Numbers®
@@ -7,6 +5,10 @@ see https://www.cas.org/support/documentation/chemical-substances/checkdig
 for a complete specification of the CAS Registry Numbers®
 and the calculation method to determine the check digit
 """
+
+from __future__ import annotations
+
+import re
 
 
 class CAS:
@@ -53,15 +55,15 @@ class CAS:
         return f"{self.cas_string:{format_spec}}"
 
     # checks if two CAS Registry Numbers are equal
-    def __eq__(self, other: object) -> bool:
+    def __eq__(self, other: CAS) -> bool:
         if not isinstance(other, CAS):
-            return False
+            raise TypeError("Comparisons can only be made between CAS objects.")
         return self.cas_integer == other.cas_integer
 
     # checks if self.cas_integer < other.cas_integer
-    def __lt__(self, other: object) -> bool:
+    def __lt__(self, other: CAS) -> bool:
         if not isinstance(other, CAS):
-            return NotImplemented
+            raise TypeError("Comparisons can only be made between CAS objects.")
         return self.cas_integer < other.cas_integer
 
     # Returns CAS Registry Number
@@ -70,7 +72,7 @@ class CAS:
         """
         Returns the CAS Registry Number as a formatted string (e.g. "58-08-2").
         """
-        return self.__cas_string
+        return self._cas_string
 
     # Sets CAS Registry Number
     #    if the passed input value is a string, parse the string according to _____00-00-0
@@ -79,7 +81,7 @@ class CAS:
     def cas_string(self, cas_rn: str) -> None:
         # convert (formatted) CAS string into integer
         if regex_cas := re.match(r"^(\d{2,7})\-(\d{2})-(\d{1})$", cas_rn):
-            self.cas_integer = self.__cas_integer = int(
+            self.cas_integer = self._cas_integer = int(
                 regex_cas.group(1) + regex_cas.group(2) + regex_cas.group(3)
             )
         # cas_rn is not following the notation rule for CAS numbers => ValueError
@@ -87,7 +89,7 @@ class CAS:
             raise ValueError(
                 f"Invalid CAS number format for '{cas_rn}' (must follow the notation _____00-00-0)"
             )
-        self.__cas_string = cas_rn
+        self._cas_string = cas_rn
 
     # Returns CAS Registry Number as an integer (without the hyphens)
     @property
@@ -95,7 +97,7 @@ class CAS:
         """
         Returns the CAS Registry Number as an integer (e.g. 58082).
         """
-        return self.__cas_integer
+        return self._cas_integer
 
     @cas_integer.setter
     def cas_integer(self, cas_rn: int) -> None:
@@ -106,7 +108,7 @@ class CAS:
             raise ValueError(
                 f"Invalid CAS number '{cas_rn}' (must be an integer between 10004 and 9999999995)"
             )
-        self.__cas_integer = cas_rn
+        self._cas_integer = cas_rn
 
     # Returns check digit of the CAS Registry Number
     @property
@@ -114,7 +116,7 @@ class CAS:
         """
         Returns the check digit of the CAS Registry Number (e.g. 2 for "58-08-2").
         """
-        return self.__check_digit
+        return self._check_digit
 
     # Sets the CAS Registry Number check digit
     @check_digit.setter
@@ -134,4 +136,4 @@ class CAS:
                 f"Invalid CAS number '{self.cas_string}' "
                 f"(found check digit '{digit_to_test}', but expected '{check_sum % 10}')"
             )
-        self.__check_digit = int(digit_to_test)
+        self._check_digit = int(digit_to_test)

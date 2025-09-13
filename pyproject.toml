@@ -1,6 +1,6 @@
 [project]
 name = "casregnum"
-version = "1.1.0"
+version = "1.1.1"
 description = "Python class to manage, check and sort CAS Registry Numbers® (CAS RN®)"
 readme = "README.md"
 authors = [
