@@ -1,6 +1,6 @@
 [project]
 name = "casregnum"
-version = "1.1.1"
+version = "1.1.2"
 description = "Python class to manage, check and sort CAS Registry Numbers® (CAS RN®)"
 readme = "README.md"
 authors = [
@@ -33,11 +33,12 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
-    "pytest",
-    "pytest-sugar",
-    "pytest-cov",
-    "ruff",
-    "twine",
+    "mypy>=1.18.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=7.0.0",
+    "pytest-sugar>=1.1.1",
+    "ruff>=0.13.0",
+    "twine>=6.2.0",
 ]
 
 [tool.pytest.ini_options]
@@ -49,6 +50,10 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "--verbose",
+    "--cov=src",
+    "--cov-branch",
+    "--cov-report=term",
+    "--cov-report=xml",
 ]
 
 [tool.ruff]

@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  code-tests:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -28,15 +28,15 @@ jobs:
     - name: Install dependencies
       run: uv sync --dev
     
-    - name: Run tests with coverage
-      run: uv run pytest -v --cov=src --cov-branch --cov-report=term --cov-report=xml
+    - name: Run tests with coverage (as defined in pyproject.toml)
+      run: uv run pytest
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
-  lint:
+  code-quality:
     runs-on: ubuntu-latest
     
     steps:
@@ -52,3 +52,6 @@ jobs:
     
     - name: Run ruff linting
       run: uv run ruff check src test
+    
+    - name: Run mypy type checking
+      run: uv run mypy src test
