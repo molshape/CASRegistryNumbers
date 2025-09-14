@@ -51,17 +51,23 @@ class CAS:
         return f"CAS(cas_rn='{self.cas_string}')"
 
     # defines a string format for CAS Registry Numbers
-    def __format__(self, format_spec) -> str:
+    def __format__(self, format_spec: str) -> str:
         return f"{self.cas_string:{format_spec}}"
 
     # checks if two CAS Registry Numbers are equal
-    def __eq__(self, other: CAS) -> bool:
+    def __eq__(self, other: object) -> bool:
+        """
+        Checks if two CAS Registry Numbers® are equal.
+        """
         if not isinstance(other, CAS):
             raise TypeError("Comparisons can only be made between CAS objects.")
         return self.cas_integer == other.cas_integer
 
     # checks if self.cas_integer < other.cas_integer
-    def __lt__(self, other: CAS) -> bool:
+    def __lt__(self, other: object) -> bool:
+        """
+        Checks if this CAS Registry Number® is less than another CAS Registry Number®.
+        """
         if not isinstance(other, CAS):
             raise TypeError("Comparisons can only be made between CAS objects.")
         return self.cas_integer < other.cas_integer
@@ -70,7 +76,7 @@ class CAS:
     @property
     def cas_string(self) -> str:
         """
-        Returns the CAS Registry Number as a formatted string (e.g. "58-08-2").
+        Returns the CAS Registry Number® as a formatted string (e.g. "58-08-2").
         """
         return self._cas_string
 
@@ -95,7 +101,7 @@ class CAS:
     @property
     def cas_integer(self) -> int:
         """
-        Returns the CAS Registry Number as an integer (e.g. 58082).
+        Returns the CAS Registry Number® as an integer (e.g. 58082).
         """
         return self._cas_integer
 
@@ -114,7 +120,7 @@ class CAS:
     @property
     def check_digit(self) -> int:
         """
-        Returns the check digit of the CAS Registry Number (e.g. 2 for "58-08-2").
+        Returns the check digit of the CAS Registry Number® as an integer (e.g. 2 for "58-08-2").
         """
         return self._check_digit
 
